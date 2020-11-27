@@ -1,7 +1,7 @@
 class Environment:
     """ Implementation of the triange checkers puzzle environment """
 
-    AVAILABLE_TRIPLES = [
+    POSSIBLE_TRIPLES = [
         [0, 2, 5],
         [2, 5, 9],
         [5, 9, 14],
@@ -29,7 +29,7 @@ class Environment:
         """ Setup the environment to initial state """
         if init_state:
             assert len(init_state) == 15, "State needs to have 15 positions"
-            assert set(init_state) < set([0, 1]), "Only 1 and 0 are valid values"
+            assert set(init_state) <= set([0, 1]), "Only 1 and 0 are valid values"
             self.state = init_state
         else:
             self.state = [1] * 15
@@ -53,9 +53,16 @@ class Environment:
         """
         pass
 
-    def available_actions():
+    def available_actions(self):
         """Next available actions from given state
         Return:
-            list of next valid actions
+            list of next valid actions tuples
         """
-        pass
+        rv = []
+        for triple in self.POSSIBLE_TRIPLES:
+            state_of_triple = [self.state[pos] for pos in triple]
+            if state_of_triple == [1, 1, 0]:
+                rv.append((triple[0], triple[2]))
+            if state_of_triple == [0, 1, 1]:
+                rv.append((triple[2], triple[0]))
+        return rv
