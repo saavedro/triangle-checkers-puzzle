@@ -4,7 +4,7 @@ Checkers puzzle
 This is a repository for gathering different computational experiments around
 little puzzle game:
 
-[[image]]
+[![Checkers puzzle](https://i.postimg.cc/0jdsdFBD/20201025-213334.jpg)]
 
 
 ### Board model
